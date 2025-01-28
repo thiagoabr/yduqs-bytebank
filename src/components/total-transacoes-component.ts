@@ -6,9 +6,9 @@ const elementoTotalDepositos: HTMLElement = document.querySelector(".total-trans
 const elementoTotalTransferencias: HTMLElement = document.querySelector(".total-transacoes .transferencias");
 const elementoTotalPagamentosBoleto: HTMLElement = document.querySelector(".total-transacoes .pagamentosBoleto");
 
-rendenizarTotalTransacoes();
+renderizarTotalTransacoes();
 
-function rendenizarTotalTransacoes (): void {
+function renderizarTotalTransacoes (): void {
     const totalTransacoes: ResumoTransacoes = Conta.agruparTransacoes();
     elementoTotalDepositos.textContent = formatarMoeda(totalTransacoes.totalDepositos).toString();
     elementoTotalTransferencias.textContent = formatarMoeda(totalTransacoes.totalTransferencias).toString();
@@ -17,7 +17,7 @@ function rendenizarTotalTransacoes (): void {
 
 const TotalTransacoesComponent = {
     atualizar() {
-        rendenizarTotalTransacoes();
+        renderizarTotalTransacoes();
     }
 }
 

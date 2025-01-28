@@ -37,8 +37,6 @@ elementoFormulario.addEventListener("submit", function (event) {
     ExtratoComponent.atualizar();
     TotalTransacoesComponent.atualizar();
     
-    //console.log(Conta.agruparTransacoes());
-
   } catch (error) {
     alert(error.message);
   }

@@ -1,15 +1,15 @@
 import { formatarMoeda } from "../utils/formatters.js";
 import Conta from '../types/Conta.js';
 const elementoSaldo = document.querySelector(".saldo-valor .valor");
-rendenizarSaldo();
-function rendenizarSaldo() {
+renderizarSaldo();
+function renderizarSaldo() {
     if (elementoSaldo != null) {
         elementoSaldo.textContent = formatarMoeda(Conta.getSaldo());
     }
 }
 const SaldoComponent = {
     atualizar() {
-        rendenizarSaldo();
+        renderizarSaldo();
     }
 };
 export default SaldoComponent;

@@ -3,8 +3,8 @@ import { formatarMoeda } from "../utils/formatters.js";
 const elementoTotalDepositos = document.querySelector(".total-transacoes .debitos");
 const elementoTotalTransferencias = document.querySelector(".total-transacoes .transferencias");
 const elementoTotalPagamentosBoleto = document.querySelector(".total-transacoes .pagamentosBoleto");
-rendenizarTotalTransacoes();
-function rendenizarTotalTransacoes() {
+renderizarTotalTransacoes();
+function renderizarTotalTransacoes() {
     const totalTransacoes = Conta.agruparTransacoes();
     elementoTotalDepositos.textContent = formatarMoeda(totalTransacoes.totalDepositos).toString();
     elementoTotalTransferencias.textContent = formatarMoeda(totalTransacoes.totalTransferencias).toString();
@@ -12,7 +12,7 @@ function rendenizarTotalTransacoes() {
 }
 const TotalTransacoesComponent = {
     atualizar() {
-        rendenizarTotalTransacoes();
+        renderizarTotalTransacoes();
     }
 };
 export default TotalTransacoesComponent;

@@ -3,9 +3,9 @@ import Conta from '../types/Conta.js';
 
 const elementoSaldo: HTMLElement = document.querySelector(".saldo-valor .valor");
 
-rendenizarSaldo();
+renderizarSaldo();
 
-function rendenizarSaldo(): void {
+function renderizarSaldo(): void {
   if (elementoSaldo != null) {
     elementoSaldo.textContent = formatarMoeda(Conta.getSaldo());
   }
@@ -13,7 +13,7 @@ function rendenizarSaldo(): void {
 
 const SaldoComponent = {
   atualizar() {
-    rendenizarSaldo();
+    renderizarSaldo();
   }
 }
 
