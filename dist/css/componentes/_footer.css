@@ -1,0 +1,21 @@
+footer {
+    background-color: #f8f9fa; 
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+    position: relative; 
+    bottom: 0;
+    width: 100%; 
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center; 
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .footer-item {
+    text-align: center; 
+  }

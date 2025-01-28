@@ -4,3 +4,4 @@ export var TipoTransacao;
     TipoTransacao["TRANSFERENCIA"] = "Transfer\u00EAncia";
     TipoTransacao["PAGAMENTO_BOLETO"] = "Pagamento de Boleto";
 })(TipoTransacao || (TipoTransacao = {}));
+;

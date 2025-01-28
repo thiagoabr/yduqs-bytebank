@@ -1,7 +1,7 @@
 import { TipoTransacao } from "./transacao/TipoTransacao.js";
 let saldo = JSON.parse(localStorage.getItem("saldo")) || 0;
 const transacoes = JSON.parse(localStorage.getItem("transacoes"), (key, value) => {
-    if (key === "data") {
+    if (key === 'data') {
         return new Date(value);
     }
     return value;
@@ -36,8 +36,8 @@ const Conta = {
         const transacoesOrdenadas = listaTransacoes.sort((t1, t2) => t2.data.getTime() - t1.data.getTime());
         let labelAtualGrupoTransacao = "";
         for (let transacao of transacoesOrdenadas) {
-            let labelGrupoTransacao = transacao.data.toLocaleDateString("pt-br", { month: "long", year: "numeric" });
-            if (labelAtualGrupoTransacao !== labelGrupoTransacao) {
+            let labelGrupoTransacao = transacao.data.toLocaleDateString('pt-br', { month: "long", year: "numeric" });
+            if (labelAtualGrupoTransacao != labelGrupoTransacao) {
                 labelAtualGrupoTransacao = labelGrupoTransacao;
                 gruposTransacoes.push({
                     label: labelGrupoTransacao,
@@ -60,8 +60,28 @@ const Conta = {
             throw new Error("Tipo de Transação é inválido!");
         }
         transacoes.push(novaTransacao);
-        console.log(this.getGruposTransacoes());
+        //console.table(this.getGruposTransacoes());
         localStorage.setItem("transacoes", JSON.stringify(transacoes));
+    },
+    agruparTransacoes() {
+        const resumo = {
+            totalDepositos: 0,
+            totalTransferencias: 0,
+            totalPagamentosBoleto: 0
+        };
+        transacoes.forEach(transacao => {
+            switch (transacao.tipoTransacao) {
+                case TipoTransacao.DEPOSITO:
+                    resumo.totalDepositos += transacao.valor;
+                    break;
+                case TipoTransacao.TRANSFERENCIA:
+                    resumo.totalTransferencias += transacao.valor * -1;
+                    break;
+                case TipoTransacao.PAGAMENTO_BOLETO:
+                    resumo.totalPagamentosBoleto += transacao.valor * -1;
+            }
+        });
+        return resumo;
     }
 };
 export default Conta;

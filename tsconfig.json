@@ -5,6 +5,7 @@
         "noEmitOnError": true
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*",
+        "dist/js/main.js"    
     ]
 }
