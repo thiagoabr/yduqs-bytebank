@@ -1,5 +1,5 @@
-import Conta from '../types/Conta.js';
-import { ResumoTransacoes } from '../types/transacao/ResumoTransacoes.js';
+import Conta from "../model/Conta.js";
+import { ResumoTransacoes } from "../model/Transacao.js";
 import { formatarMoeda } from "../utils/formatters.js";
 
 const elementoTotalDepositos: HTMLElement = document.querySelector(".total-transacoes .debitos");
@@ -9,7 +9,7 @@ const elementoTotalPagamentosBoleto: HTMLElement = document.querySelector(".tota
 renderizarTotalTransacoes();
 
 function renderizarTotalTransacoes (): void {
-    const totalTransacoes: ResumoTransacoes = Conta.agruparTransacoes();
+    const totalTransacoes: ResumoTransacoes = new Conta().agruparTransacoes();
     elementoTotalDepositos.textContent = formatarMoeda(totalTransacoes.totalDepositos).toString();
     elementoTotalTransferencias.textContent = formatarMoeda(totalTransacoes.totalTransferencias).toString();
     elementoTotalPagamentosBoleto.textContent = formatarMoeda(totalTransacoes.totalPagamentosBoleto).toString();

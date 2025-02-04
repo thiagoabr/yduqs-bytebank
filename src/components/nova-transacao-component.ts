@@ -1,44 +1,46 @@
-import { TipoTransacao } from "../types/transacao/TipoTransacao.js";
-import { Transacao } from "../types/transacao/Transacao.js";
+import Conta from "../model/Conta.js";
+import { Transacao, TipoTransacao } from "../model/Transacao.js";
 import DataComponent from "./data-component.js";
 import ExtratoComponent from "./extrato-component.js";
 import SaldoComponent from "./saldo-component.js";
 import TotalTransacoesComponent from "./total-transacoes-component.js";
-import Conta from "../types/Conta.js";
 
-const elementoFormulario: HTMLFormElement = document.querySelector(".block-nova-transacao form");
+const elementoFormulario: HTMLFormElement = document.querySelector("#formNovaTransacao");
 
 elementoFormulario.addEventListener("submit", function (event) {
   try {
+
     event.preventDefault();
+
     if (!elementoFormulario.checkValidity()) {
       alert("Por favor, preencha todos os campos da trasnsação!");
       return;
     }
 
-    const inputTipoTransacao: HTMLSelectElement = elementoFormulario.querySelector("#tipoTransacao");
-    const inputValor: HTMLInputElement = elementoFormulario.querySelector("#valor");
-    const inputData: HTMLInputElement = elementoFormulario.querySelector("#data");
+    const tipoTransacao = (document.querySelector("#tipoTransacao") as HTMLSelectElement).value as TipoTransacao;
+    const valorTransacao = (document.querySelector("#valor") as HTMLInputElement).valueAsNumber;
+    const elementoData = document.querySelector("#data") as HTMLInputElement
+    const dataTransacao = new Date(elementoData.value + " 00:00:00");
 
-    let tipoTransacao: TipoTransacao = inputTipoTransacao.value as TipoTransacao;
-    let valor: number = inputValor.valueAsNumber;
-    let data: Date = new Date(inputData.value + " 00:00:00");
+    let conta = new Conta();
 
-    const novaTransacao: Transacao = {
-      tipoTransacao: tipoTransacao,
-      valor: valor,
-      data: data,
-    };
+    let novaTransacao = new Transacao(
+      valorTransacao,
+      tipoTransacao,
+      dataTransacao,
+      conta.getTitular(),
+      "Conta Alura"
+    );
+
+    conta.registrarTransacao(novaTransacao);
 
     DataComponent.atualizar();
-    Conta.registrarTransacao(novaTransacao);
     SaldoComponent.atualizar();
     elementoFormulario.reset();
     ExtratoComponent.atualizar();
     TotalTransacoesComponent.atualizar();
-    
-  } catch (error) {
-    alert(error.message);
-  }
 
+  } catch (error) {
+    alert("Ocorreu um erro inesperado durante o processamento da transação: " + error.message);
+  }
 });

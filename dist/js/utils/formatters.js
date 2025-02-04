@@ -5,7 +5,7 @@ export function formatarMoeda(valor) {
         currency: "BRL"
     });
 }
-export function formataData(data, formato = FormatoData.PADRAO) {
+export function formatarData(data, formato = FormatoData.PADRAO) {
     if (formato === FormatoData.DIA_SEMANA_DIA_MES_ANO) {
         return data.toLocaleDateString("pt-br", {
             weekday: "long",

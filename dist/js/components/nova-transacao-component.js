@@ -1,9 +1,10 @@
+import Conta from "../model/Conta.js";
+import { Transacao } from "../model/Transacao.js";
 import DataComponent from "./data-component.js";
 import ExtratoComponent from "./extrato-component.js";
 import SaldoComponent from "./saldo-component.js";
 import TotalTransacoesComponent from "./total-transacoes-component.js";
-import Conta from "../types/Conta.js";
-const elementoFormulario = document.querySelector(".block-nova-transacao form");
+const elementoFormulario = document.querySelector("#formNovaTransacao");
 elementoFormulario.addEventListener("submit", function (event) {
     try {
         event.preventDefault();
@@ -11,25 +12,20 @@ elementoFormulario.addEventListener("submit", function (event) {
             alert("Por favor, preencha todos os campos da trasnsação!");
             return;
         }
-        const inputTipoTransacao = elementoFormulario.querySelector("#tipoTransacao");
-        const inputValor = elementoFormulario.querySelector("#valor");
-        const inputData = elementoFormulario.querySelector("#data");
-        let tipoTransacao = inputTipoTransacao.value;
-        let valor = inputValor.valueAsNumber;
-        let data = new Date(inputData.value + " 00:00:00");
-        const novaTransacao = {
-            tipoTransacao: tipoTransacao,
-            valor: valor,
-            data: data,
-        };
+        const tipoTransacao = document.querySelector("#tipoTransacao").value;
+        const valorTransacao = document.querySelector("#valor").valueAsNumber;
+        const elementoData = document.querySelector("#data");
+        const dataTransacao = new Date(elementoData.value + " 00:00:00");
+        let conta = new Conta();
+        let novaTransacao = new Transacao(valorTransacao, tipoTransacao, dataTransacao, conta.getTitular(), "Conta Alura");
+        conta.registrarTransacao(novaTransacao);
         DataComponent.atualizar();
-        Conta.registrarTransacao(novaTransacao);
         SaldoComponent.atualizar();
         elementoFormulario.reset();
         ExtratoComponent.atualizar();
         TotalTransacoesComponent.atualizar();
     }
     catch (error) {
-        alert(error.message);
+        alert("Ocorreu um erro inesperado durante o processamento da transação: " + error.message);
     }
 });

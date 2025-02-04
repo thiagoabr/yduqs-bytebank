@@ -1,16 +1,16 @@
-import { formataData } from "../utils/formatters.js";
+import { formatarData } from "../utils/formatters.js";
 import { FormatoData } from "../types/FormatoData.js";
-import Conta from '../types/Conta.js';
-const elementoDataAcesso = document.querySelector(".block-saldo time");
-rendenizarData();
-function rendenizarData() {
+import Conta from "../model/Conta.js";
+const elementoDataAcesso = document.querySelector("#dataAtual");
+renderizarData();
+function renderizarData() {
     if (elementoDataAcesso != null) {
-        elementoDataAcesso.textContent = formataData(Conta.getDataAcesso(), FormatoData.DIA_SEMANA_DIA_MES_ANO);
+        elementoDataAcesso.textContent = formatarData(Conta.getDataAcesso(), FormatoData.DIA_SEMANA_DIA_MES_ANO);
     }
 }
 const DataComponent = {
     atualizar() {
-        rendenizarData();
+        renderizarData();
     }
 };
 export default DataComponent;
